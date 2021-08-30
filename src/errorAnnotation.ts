@@ -15,7 +15,7 @@ export const parseErrors = () => (target: Function) => {
             try {
                 const result = await (<Promise<ResponseBase>>originalMethod.apply(this, args));
                 return result;
-            } catch (e) {
+            } catch (e: any) {
                 e.errorIdentifier = '!parseGeneratedError!';
                 return <ProcessingError>e;
             }
