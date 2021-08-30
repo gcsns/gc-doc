@@ -1,4 +1,4 @@
-import { RoutingControllersOptions, HttpError } from 'routing-controllers';
+import { RoutingControllersOptions } from 'routing-controllers';
 import { OpenAPIObject } from 'openapi3-ts';
 
 export type RoutingOptions = RoutingControllersOptions &
