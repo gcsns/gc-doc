@@ -14,7 +14,7 @@ import { RoutingOptions } from './types';
 export class Router {
     private static routerConfig: RoutingOptions;
 
-    public static initialize(app: Express.Application, config: RoutingOptions, container: IocAdapter, allowedOrigin: String) {
+    public static initialize(app: Express.Application, config: RoutingOptions, container: IocAdapter, allowedOrigin: string) {
         app.use(Helmet());
 
         const corsConfig = config.cors;
@@ -47,7 +47,7 @@ export class Router {
                 res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
                 res.setHeader('Access-Control-Allow-Methods', 'GET');
                 if (allowedOrigin)
-                    res.setHeader('Access-Control-Allow-Origin', `${allowedOrigin}`);
+                    res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
                 res.json(spec);
             });
         }
