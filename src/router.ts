@@ -14,7 +14,7 @@ import { RoutingOptions } from './types';
 export class Router {
     private static routerConfig: RoutingOptions;
 
-    public static initialize(app: Express.Application, config: RoutingOptions, container: IocAdapter, allowedOrigin: string) {
+    public static initialize(app: Express.Application, config: RoutingOptions, container: IocAdapter, allowedOrigin?: string) {
         app.use(Helmet());
 
         const corsConfig = config.cors;
