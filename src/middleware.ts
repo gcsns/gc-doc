@@ -1,5 +1,8 @@
+import { Service } from 'typedi';
 import { Express, Logger } from '@adhityan/gc-logger';
 import { Middleware, ExpressErrorMiddlewareInterface } from 'routing-controllers';
+
+@Service()
 @Middleware({ type: 'after' })
 export class ErrorFormatHandler implements ExpressErrorMiddlewareInterface {
     error(error: any, request: Express.Request, response: Express.Response, next: () => any) {
