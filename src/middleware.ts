@@ -11,7 +11,7 @@ export class ErrorFormatHandler implements ExpressErrorMiddlewareInterface {
 
         if ((<any>error).errorIdentifier) delete (<any>error).errorIdentifier;
         if ((<any>error).stack) delete (<any>error).stack;
-        response.status(status).send(Object.keys(error).length === 0 ? { message: error.message } : error);
+        response.status(status).json(Object.keys(error).length === 0 ? { message: error.message } : error);
         next();
     }
 }
