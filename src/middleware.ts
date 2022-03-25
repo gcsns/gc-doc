@@ -1,5 +1,5 @@
 import { Service } from 'typedi';
-import { Express, Logger } from '@adhityan/gc-logger';
+import { Express, Logger } from '@gamechange/gc-logger';
 import { Middleware, ExpressErrorMiddlewareInterface } from 'routing-controllers';
 
 @Service()

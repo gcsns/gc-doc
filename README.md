@@ -7,7 +7,7 @@ GC Logger that adds a documentation route automatically
 #
 
 ```sh
-$ npm install @adhityan/gc-doc
+$ npm install @gamechange/gc-doc
 ```
 
 ## Breaking changes in major version update 4.0.0

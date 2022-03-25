@@ -5,7 +5,7 @@ import { getMetadataArgsStorage, useContainer, IocAdapter, useExpressServer } fr
 import { validationMetadatasToSchemas } from 'class-validator-jsonschema';
 import { routingControllersToSpec } from 'routing-controllers-openapi';
 
-import { Logger } from '@adhityan/gc-logger';
+import { Logger } from '@gamechange/gc-logger';
 import Helmet from 'helmet';
 
 import { ErrorFormatHandler } from './middleware';

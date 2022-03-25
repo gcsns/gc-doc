@@ -1,5 +1,5 @@
 {
-    "name": "@adhityan/gc-doc",
+    "name": "@gamechange/gc-doc",
     "version": "4.1.0",
     "description": "GC Router library",
     "main": "./lib/index.js",
@@ -30,8 +30,8 @@
         "routing-controllers-openapi": "^3.1.0"
     },
     "peerDependencies": {
-        "@adhityan/gc-logger": "^3.1.7",
-        "typeorm": "^0.2.41",
-        "typedi": "^0.10.0"
+        "@gamechange/gc-logger": "^3.1.7",
+        "typedi": "^0.10.0",
+        "typeorm": "^0.2.41"
     }
 }
