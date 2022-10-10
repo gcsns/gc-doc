@@ -3,6 +3,9 @@ import 'reflect-metadata';
 import Express from 'express';
 import { getMetadataArgsStorage, useContainer, IocAdapter, useExpressServer } from 'routing-controllers';
 import { validationMetadatasToSchemas } from 'class-validator-jsonschema';
+// acessing private API to add types of nested array of object in openapi specs
+// as suggested here https://github.com/typestack/class-transformer/issues/563
+const { defaultMetadataStorage } = require ('class-transformer/cjs/storage');
 import { routingControllersToSpec } from 'routing-controllers-openapi';
 
 import { Logger } from '@gamechange/gc-logger';
@@ -33,6 +36,7 @@ export class Router {
                 const storage = getMetadataArgsStorage();
 
                 const schemas = validationMetadatasToSchemas({
+                    classTransformerMetadataStorage : defaultMetadataStorage,
                     refPointerPrefix: '#/components/schemas/'
                 });
 
