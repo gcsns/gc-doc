@@ -26,5 +26,5 @@ export class ProcessingError extends Error {
 }
 
 export type ErrorResponseType = {
-    [key: string] : any;
+    [key: string] : unknown;
 }

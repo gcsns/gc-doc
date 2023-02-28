@@ -10,7 +10,6 @@ export class ErrorFormatHandler implements ExpressErrorMiddlewareInterface {
     error(error: any, request: Express.Request, response: Express.Response, next: () => any) {
         const status = error.httpCode || error.statusCode || request.statusCode || 400;
         Logger.error('[Operation Failed]', error);
-        error.code = error.code || (status === 400 ? 'BAD_REQUEST': 'SOMETHING_WENT_WRONG');
         
         const finalResponse: ErrorResponseType = {};
         Router.errorResponseKeys.forEach((key) => {
