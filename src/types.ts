@@ -24,3 +24,7 @@ export class ProcessingError extends Error {
         return this;
     }
 }
+
+export type ErrorResponseType = {
+    [key: string] : any;
+}
