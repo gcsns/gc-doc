@@ -16,8 +16,9 @@ import { RoutingOptions } from './types';
 
 export class Router {
     private static routerConfig: RoutingOptions;
+    public static errorResponseKeys: string[];
 
-    public static initialize(app: Express.Application, config: RoutingOptions, container: IocAdapter, allowedOrigin?: string) {
+    public static initialize(app: Express.Application, config: RoutingOptions, container: IocAdapter, allowedOrigin?: string, errorResponseKeys?: string[]) {
         app.use(Helmet());
 
         const corsConfig = config.cors;
@@ -65,7 +66,7 @@ export class Router {
         config.defaultErrorHandler = false;
         if (container) useContainer(container);
         Router.routerConfig = config;
-
+        Router.errorResponseKeys = errorResponseKeys || ['code', 'name', 'message', 'httpCode', 'errors'];
         useExpressServer(app, config);
         Logger.info('Router loaded');
     }
