@@ -30,7 +30,7 @@
         "class-validator-jsonschema": "^4.0.0",
         "cors": "^2.8.5",
         "helmet": "^4.6.0",
-        "reflect-metadata": "^0.1.13",
+        "reflect-metadata": "^0.1.14",
         "routing-controllers-openapi": "^4.0.0"
     },
     "peerDependencies": {
