@@ -5,11 +5,7 @@ export type RoutingOptions = RoutingControllersOptions &
     (
         {
               enableDocumentation: true;
-              documentationParameters: Partial<OpenAPIObject> & {
-                  title: string;
-                  baseUrl: string;
-                  description?: string;
-              };
+              documentationParameters: Partial<OpenAPIObject>;
         } | {
               enableDocumentation: false;
         }

@@ -7,6 +7,7 @@ import { validationMetadatasToSchemas } from 'class-validator-jsonschema';
 // as suggested here https://github.com/typestack/class-transformer/issues/563
 const { defaultMetadataStorage } = require ('class-transformer/cjs/storage');
 import { routingControllersToSpec } from 'routing-controllers-openapi';
+import * as swaggerUiExpress from 'swagger-ui-express';
 
 import { Logger } from '@gamechange/gc-logger';
 import Helmet from 'helmet';
@@ -29,25 +30,29 @@ export class Router {
         else Logger.warn('CORS is not enabled!')
 
         if (config.enableDocumentation) {
+            const storage = getMetadataArgsStorage();
+
+            const schemas = validationMetadatasToSchemas({
+                classTransformerMetadataStorage : defaultMetadataStorage,
+                refPointerPrefix: '#/components/schemas/'
+            });
+
+            const spec = routingControllersToSpec(
+                storage,
+                config,
+                { 
+                    ...config.documentationParameters,
+                    components: {
+                        ...config.documentationParameters.components,
+                        schemas
+                    }
+                }
+            );
+
             const documentationUrl = '/openapi'; //not allowed to customize it because we want to load an external swagger for this
             Logger.debug(`OpenAPI path: ${documentationUrl}`);
-
             app.get(documentationUrl, function (_req, res) {
                 Logger.info('Serving OpenAPI Spec');
-                const storage = getMetadataArgsStorage();
-
-                const schemas = validationMetadatasToSchemas({
-                    classTransformerMetadataStorage : defaultMetadataStorage,
-                    refPointerPrefix: '#/components/schemas/'
-                });
-
-                const spec = routingControllersToSpec(
-                    storage,
-                    config,
-                    config.documentationParameters && {
-                        components: { schemas }
-                    }
-                );
 
                 res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
                 res.setHeader('Access-Control-Allow-Methods', 'GET');
@@ -55,6 +60,9 @@ export class Router {
                     res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
                 res.json(spec);
             });
+            const swaggerUiUrl = '/docs'; //not allowed to customize it because we want to load an external swagger for this
+            Logger.debug(`SwaggerUiUrl path: ${swaggerUiUrl}`);
+            app.use('/docs', swaggerUiExpress.serve, swaggerUiExpress.setup(spec))
         }
 
         if (config.middlewares) (<Function[]>config.middlewares).push(ErrorFormatHandler);
