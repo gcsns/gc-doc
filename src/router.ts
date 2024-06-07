@@ -5,7 +5,7 @@ import { getMetadataArgsStorage, useContainer, IocAdapter, useExpressServer } fr
 import { validationMetadatasToSchemas } from 'class-validator-jsonschema';
 // acessing private API to add types of nested array of object in openapi specs
 // as suggested here https://github.com/typestack/class-transformer/issues/563
-const { defaultMetadataStorage } = require ('class-transformer/cjs/storage');
+const { defaultMetadataStorage } = require('class-transformer/cjs/storage');
 import { routingControllersToSpec } from 'routing-controllers-openapi';
 import * as swaggerUiExpress from 'swagger-ui-express';
 
@@ -33,18 +33,21 @@ export class Router {
             const storage = getMetadataArgsStorage();
 
             const schemas = validationMetadatasToSchemas({
-                classTransformerMetadataStorage : defaultMetadataStorage,
+                classTransformerMetadataStorage: defaultMetadataStorage,
                 refPointerPrefix: '#/components/schemas/'
             });
 
             const spec = routingControllersToSpec(
                 storage,
                 config,
-                { 
+                {
                     ...config.documentationParameters,
                     components: {
                         ...config.documentationParameters.components,
-                        schemas
+                        schemas: {
+                            ...config.documentationParameters.components?.schemas,
+                            ...schemas,
+                        }
                     }
                 }
             );
